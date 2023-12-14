@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Chat_App
 {
-    public partial class test : DevExpress.XtraEditors.XtraForm
+    public partial class Chat : DevExpress.XtraEditors.XtraForm
     {
-        public test()
+        public Chat()
         {
             InitializeComponent();
         }
