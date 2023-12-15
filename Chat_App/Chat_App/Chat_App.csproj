@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccesL\SQL.cs" />
     <Compile Include="UI\Chat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +96,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UI\logoQbarküçük.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
