@@ -34,6 +34,8 @@
             this.btnexit2 = new DevExpress.XtraEditors.SimpleButton();
             this.tbcntrlchat = new DevExpress.XtraTab.XtraTabControl();
             this.lstcontrolcustomer = new DevExpress.XtraEditors.ListBoxControl();
+            this.memoEdit1 = new DevExpress.XtraEditors.MemoEdit();
+            this.BtnSend = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
             this.splitContainerControl1.Panel1.SuspendLayout();
@@ -41,7 +43,9 @@
             this.splitContainerControl1.Panel2.SuspendLayout();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbcntrlchat)).BeginInit();
+            this.tbcntrlchat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lstcontrolcustomer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainerControl1
@@ -135,6 +139,23 @@
             this.lstcontrolcustomer.TabIndex = 0;
             this.lstcontrolcustomer.SelectedIndexChanged += new System.EventHandler(this.lstcontrolcustomer_SelectedIndexChanged);
             // 
+            // memoEdit1
+            // 
+            this.memoEdit1.Location = new System.Drawing.Point(82, 52);
+            this.memoEdit1.Name = "memoEdit1";
+            this.memoEdit1.Size = new System.Drawing.Size(236, 254);
+            this.memoEdit1.TabIndex = 0;
+            // 
+            // BtnSend
+            // 
+            this.BtnSend.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.BtnSend.Location = new System.Drawing.Point(1, 410);
+            this.BtnSend.Name = "BtnSend";
+            this.BtnSend.Size = new System.Drawing.Size(390, 38);
+            this.BtnSend.TabIndex = 1;
+            this.BtnSend.Text = "button1";
+            this.BtnSend.UseVisualStyleBackColor = true;
+            // 
             // Chat
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(33)))), ((int)(((byte)(30)))));
@@ -162,7 +183,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tbcntrlchat)).EndInit();
+            this.tbcntrlchat.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lstcontrolcustomer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -174,5 +197,7 @@
         public DevExpress.XtraTab.XtraTabControl tbcntrlchat;
         private DevExpress.XtraEditors.SimpleButton btnexit2;
         public System.Windows.Forms.Panel titpanel;
+        private DevExpress.XtraEditors.MemoEdit memoEdit1;
+        private System.Windows.Forms.Button BtnSend;
     }
 }

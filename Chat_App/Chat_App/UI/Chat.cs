@@ -1,4 +1,5 @@
 ﻿using Chat_App.DataAccesL;
+using DevExpress.Data.ExpressionEditor;
 using DevExpress.XtraEditors;
 using DevExpress.XtraTab;
 using System;
@@ -9,10 +10,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Chat_App.DataAccesL.SQL;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Chat_App
 {
@@ -25,6 +23,7 @@ namespace Chat_App
         public Chat()
         {
             InitializeComponent();
+            InitializeComponents();
         }
         public async void Chat_Load(object sender, EventArgs e)
         {
@@ -64,17 +63,31 @@ namespace Chat_App
                 {
                     // Yoksa, yeni bir XtraTabPage oluştur ve ekranı güncelle
                     XtraTabPage newTabPage = new XtraTabPage { Text = selectedName, Name = selectedName };
-                    tbcntrlchat.TabPages.Add(newTabPage);
-                    tbcntrlchat.SelectedTabPage = newTabPage;
+                    //tbcntrlchat.TabPages.Add(newTabPage);
+                    //tbcntrlchat.SelectedTabPage = newTabPage;
 
-                    // Yeni oluşturulan XtraTabPage içine ekleyeceğiniz kontrol ve işlemleri burada gerçekleştirebilirsiniz
-                    // Örneğin:
-                    // newTabPage.Controls.Add(new DevExpress.XtraEditors.LabelControl() { Text = "Yeni XtraTabPage içeriği" });
-                    ListBox chatListBox = new ListBox();
-                    chatListBox.Dock = DockStyle.Fill;
-                    newTabPage.Controls.Add(chatListBox);
+                    ChatControl chatControl = new ChatControl();
+                    chatControl.Dock = DockStyle.Fill;
+
+                    // ChatControl içindeki MemoEdit'e örnek mesaj ekleyin (istediğiniz gibi düzenleyebilirsiniz)
+                    chatControl.AddMessage("User1", "Hello, how are you?");
+
+                    // ChatControl'ü yeni sayfaya ekleyin
+                    newTabPage.Controls.Add(chatControl);
+
+                    // TabControl'a yeni sayfayı ekleyin
+                    tbcntrlchat.TabPages.Add(newTabPage);
+
+                    // Yeni oluşturulan sayfayı seçin
+                    tbcntrlchat.SelectedTabPage = newTabPage;
                 }
             }
+        }
+        private void InitializeComponents()
+        {
+            //tbcntrlchat = new XtraTabControl();
+            //tbcntrlchat.Dock = DockStyle.Fill;
+            //this.Controls.Add(tbcntrlchat);
         }
         private void titpanel_MouseDown(object sender, MouseEventArgs e)
         {
@@ -88,5 +101,30 @@ namespace Chat_App
                 this.Top += e.Y - lastPoint.Y;
             }
         }
+    }
+}
+public class ChatControl : MemoEdit
+{
+    private MemoEdit memoEdit;
+
+    public ChatControl()
+    {
+        InitializeComponents();
+    }
+
+    private void InitializeComponents()
+    {
+        memoEdit = new MemoEdit();
+        memoEdit.Dock = DockStyle.Fill;
+        this.Controls.Add(memoEdit);
+    }
+
+    public void AddMessage(string sender, string message)
+    {
+        memoEdit.Text += $"[{DateTime.Now:HH:mm:ss}] {sender}: {message}\r\n";
+
+        // İstenirse, en alttaki mesajı görünür yapabilirsiniz
+        memoEdit.SelectionStart = memoEdit.Text.Length;
+        memoEdit.ScrollToCaret();
     }
 }
