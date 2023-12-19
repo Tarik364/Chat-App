@@ -1,4 +1,5 @@
 ﻿using Chat_App.DataAccesL;
+using Chat_App.UI;
 using DevExpress.Data.ExpressionEditor;
 using DevExpress.XtraEditors;
 using DevExpress.XtraTab;
@@ -17,13 +18,18 @@ namespace Chat_App
     public partial class Chat : DevExpress.XtraEditors.XtraForm
     {
         private Point lastPoint;
-        Login login = new Login();
         public List<Tuple<string, string>> userlist = new List<Tuple<string, string>>();
         Chat_App.DataAccesL.SQL sql = new SQL();
+        public string username;
+        public int userid;
         public Chat()
         {
             InitializeComponent();
-            InitializeComponents();
+        }
+        public async void Getusername(int userid,string usernameparam)
+        {
+            this.userid = userid;
+            username = usernameparam.Trim();
         }
         public async void Chat_Load(object sender, EventArgs e)
         {
@@ -32,9 +38,7 @@ namespace Chat_App
         }
         private void btnexit2_Click(object sender, EventArgs e)
         {
-            login.Show();
             this.Dispose();
-            login.Dispose();
         }
         private async void ListBoxDoldur(List<Tuple<string, string>> alist)
         {
@@ -57,37 +61,41 @@ namespace Chat_App
 
                 if (existingTabPage != null)
                 {
-                    tbcntrlchat.SelectedTabPage = existingTabPage;
+                    existingTabPage.Controls.Clear();
+                    //tbcntrlchat.SelectedTabPage = existingTabPage;
+                    ChatDoldur(selectedName, selectedValue);
                 }
                 else
                 {
-                    // Yoksa, yeni bir XtraTabPage oluştur ve ekranı güncelle
-                    XtraTabPage newTabPage = new XtraTabPage { Text = selectedName, Name = selectedName };
-                    //tbcntrlchat.TabPages.Add(newTabPage);
-                    //tbcntrlchat.SelectedTabPage = newTabPage;
-
-                    ChatControl chatControl = new ChatControl();
-                    chatControl.Dock = DockStyle.Fill;
-
-                    // ChatControl içindeki MemoEdit'e örnek mesaj ekleyin (istediğiniz gibi düzenleyebilirsiniz)
-                    chatControl.AddMessage("User1", "Hello, how are you?");
-
-                    // ChatControl'ü yeni sayfaya ekleyin
-                    newTabPage.Controls.Add(chatControl);
-
-                    // TabControl'a yeni sayfayı ekleyin
-                    tbcntrlchat.TabPages.Add(newTabPage);
-
-                    // Yeni oluşturulan sayfayı seçin
-                    tbcntrlchat.SelectedTabPage = newTabPage;
+                    ChatDoldur(selectedName, selectedValue);
                 }
             }
         }
-        private void InitializeComponents()
+        private void ChatDoldur(string selectedName, int selectedValue)
         {
-            //tbcntrlchat = new XtraTabControl();
-            //tbcntrlchat.Dock = DockStyle.Fill;
-            //this.Controls.Add(tbcntrlchat);
+            // Yoksa, yeni bir XtraTabPage oluştur ve ekranı güncelle
+            XtraTabPage newTabPage = new XtraTabPage { Text = selectedName, Name = selectedName };
+
+
+            ChatControl chatControl = new ChatControl();
+            chatControl.Dock = DockStyle.Fill;
+
+            //Chat de bulunan mesajları aldık..
+            List<ChatMessages> messages = sql.GetMessages(selectedValue);
+            foreach (ChatMessages message in messages)
+            {
+                chatControl.AddMessage(message.MessageTime, message.MessageClient, message.MessageText);
+            }
+            //gerekli kullanacağı bilgiler sınıfa verildi..
+            chatControl.Getusername(selectedValue, userid, username);
+            // ChatControl'ü yeni sayfaya ekleyin
+            newTabPage.Controls.Add(chatControl);
+
+            // TabControl'a yeni sayfayı ekleyin
+            tbcntrlchat.TabPages.Add(newTabPage);
+
+            // Yeni oluşturulan sayfayı seçin
+            tbcntrlchat.SelectedTabPage = newTabPage;
         }
         private void titpanel_MouseDown(object sender, MouseEventArgs e)
         {
@@ -101,30 +109,5 @@ namespace Chat_App
                 this.Top += e.Y - lastPoint.Y;
             }
         }
-    }
-}
-public class ChatControl : MemoEdit
-{
-    private MemoEdit memoEdit;
-
-    public ChatControl()
-    {
-        InitializeComponents();
-    }
-
-    private void InitializeComponents()
-    {
-        memoEdit = new MemoEdit();
-        memoEdit.Dock = DockStyle.Fill;
-        this.Controls.Add(memoEdit);
-    }
-
-    public void AddMessage(string sender, string message)
-    {
-        memoEdit.Text += $"[{DateTime.Now:HH:mm:ss}] {sender}: {message}\r\n";
-
-        // İstenirse, en alttaki mesajı görünür yapabilirsiniz
-        memoEdit.SelectionStart = memoEdit.Text.Length;
-        memoEdit.ScrollToCaret();
     }
 }

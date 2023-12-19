@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
-            this.txtuser = new DevExpress.XtraEditors.TextEdit();
             this.txtpass = new DevExpress.XtraEditors.TextEdit();
             this.lbluser = new DevExpress.XtraEditors.LabelControl();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -39,7 +38,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnlogin = new DevExpress.XtraEditors.SimpleButton();
             this.lblpass = new DevExpress.XtraEditors.LabelControl();
-            ((System.ComponentModel.ISupportInitialize)(this.txtuser.Properties)).BeginInit();
+            this.cmbuser = new DevExpress.XtraEditors.CheckedComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.txtpass.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -47,18 +46,8 @@
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbuser.Properties)).BeginInit();
             this.SuspendLayout();
-            // 
-            // txtuser
-            // 
-            resources.ApplyResources(this.txtuser, "txtuser");
-            this.txtuser.Name = "txtuser";
-            this.txtuser.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(33)))), ((int)(((byte)(30)))));
-            this.txtuser.Properties.Appearance.Font = ((System.Drawing.Font)(resources.GetObject("txtuser.Properties.Appearance.Font")));
-            this.txtuser.Properties.Appearance.ForeColor = System.Drawing.Color.White;
-            this.txtuser.Properties.Appearance.Options.UseBackColor = true;
-            this.txtuser.Properties.Appearance.Options.UseFont = true;
-            this.txtuser.Properties.Appearance.Options.UseForeColor = true;
             // 
             // txtpass
             // 
@@ -138,8 +127,8 @@
             this.tableLayoutPanel1.Controls.Add(this.btnlogin, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblpass, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtpass, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtuser, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.lbluser, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cmbuser, 2, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // btnlogin
@@ -167,6 +156,18 @@
             resources.ApplyResources(this.lblpass, "lblpass");
             this.lblpass.Name = "lblpass";
             // 
+            // cmbuser
+            // 
+            resources.ApplyResources(this.cmbuser, "cmbuser");
+            this.cmbuser.Name = "cmbuser";
+            this.cmbuser.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(33)))), ((int)(((byte)(30)))));
+            this.cmbuser.Properties.Appearance.ForeColor = System.Drawing.Color.White;
+            this.cmbuser.Properties.Appearance.Options.UseBackColor = true;
+            this.cmbuser.Properties.Appearance.Options.UseForeColor = true;
+            this.cmbuser.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("cmbuser.Properties.Buttons"))))});
+            this.cmbuser.Properties.SelectAllItemVisible = false;
+            // 
             // Login
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(33)))), ((int)(((byte)(30)))));
@@ -181,7 +182,7 @@
             this.IsMdiContainer = true;
             this.KeyPreview = true;
             this.Name = "Login";
-            ((System.ComponentModel.ISupportInitialize)(this.txtuser.Properties)).EndInit();
+            this.Load += new System.EventHandler(this.Login_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtpass.Properties)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -191,13 +192,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbuser.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private DevExpress.XtraEditors.TextEdit txtuser;
         private DevExpress.XtraEditors.TextEdit txtpass;
         private DevExpress.XtraEditors.LabelControl lbluser;
         private System.Windows.Forms.SplitContainer splitContainer1;
@@ -207,5 +207,6 @@
         private DevExpress.XtraEditors.SimpleButton btndisable;
         private System.Windows.Forms.PictureBox pictureBox1;
         private DevExpress.XtraEditors.SimpleButton btnexit;
+        public DevExpress.XtraEditors.CheckedComboBoxEdit cmbuser;
     }
 }
